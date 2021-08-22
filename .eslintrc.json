@@ -14,6 +14,7 @@
     "no-underscore-dangle": "off",
     "no-shadow": "off",
     "consistent-return": "off",
-    "no-param-reassign": "off"
+    "no-param-reassign": "off",
+    "func-names": "off"
   }
 }

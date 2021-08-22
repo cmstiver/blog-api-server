@@ -3,7 +3,7 @@ const { body, validationResult } = require('express-validator');
 const Comment = require('../models/comment');
 
 exports.comment_list = (req, res, next) => {
-  Comment.find().exec((err, listComments) => {
+  Comment.find({ postid: req.params.postid }).exec((err, listComments) => {
     if (err) {
       return next(err);
     }
@@ -22,6 +22,7 @@ exports.comment_create = [
       name: req.body.name,
       body: req.body.body,
       date: req.body.date,
+      postid: req.body.postid,
     });
 
     if (!errors.isEmpty()) {
@@ -35,3 +36,12 @@ exports.comment_create = [
     });
   },
 ];
+
+exports.comment_delete = (req, res, next) => {
+  Comment.findOneAndDelete(req.params.id).exec((err, listComments) => {
+    if (err) {
+      return next(err);
+    }
+    return res.send(listComments);
+  });
+};

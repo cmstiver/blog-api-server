@@ -16,6 +16,7 @@ const CommentSchema = new Schema({
     minLength: 3,
   },
   date: { type: Date, default: Date.now },
+  postid: { type: String, required: true },
 });
 
 module.exports = mongoose.model('comment', CommentSchema);

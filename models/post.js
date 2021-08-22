@@ -7,7 +7,7 @@ const PostSchema = new Schema({
   body: { type: String, required: true },
   date: { type: Date, default: Date.now },
   image: { type: String, required: true },
-  published: { type: Boolean },
+  published: { type: Boolean, default: false },
 });
 
 PostSchema.virtual('url').get(function () {

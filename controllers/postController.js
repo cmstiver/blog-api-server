@@ -3,12 +3,14 @@ const { body, validationResult } = require('express-validator');
 const Post = require('../models/post');
 
 exports.post_list = (req, res, next) => {
-  Post.find().exec((err, listPosts) => {
-    if (err) {
-      return next(err);
-    }
-    return res.send(listPosts);
-  });
+  Post.find()
+    .sort({ date: -1 })
+    .exec((err, listPosts) => {
+      if (err) {
+        return next(err);
+      }
+      return res.send(listPosts);
+    });
 };
 
 exports.post_create = [

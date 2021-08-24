@@ -7,6 +7,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose');
+const cors = require('cors');
 
 const mongoDB = process.env.MONGODB_URI;
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -19,14 +20,6 @@ const commentsRouter = require('./routes/comments');
 
 const app = express();
 
-// CORS
-app.use((req, res, next) => {
-  res.setHeader('Acces-Control-Allow-Origin', '*');
-  res.setHeader('Acces-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE');
-  res.setHeader('Acces-Contorl-Allow-Methods', 'Content-Type', 'Authorization');
-  next();
-});
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -38,6 +31,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(compression());
 app.use(helmet());
+app.use(cors());
 
 app.use('/posts', postsRouter);
 app.use('/comments', commentsRouter);

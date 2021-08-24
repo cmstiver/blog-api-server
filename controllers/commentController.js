@@ -3,12 +3,14 @@ const { body, validationResult } = require('express-validator');
 const Comment = require('../models/comment');
 
 exports.comment_list = (req, res, next) => {
-  Comment.find({ postid: req.params.postid }).exec((err, listComments) => {
-    if (err) {
-      return next(err);
-    }
-    return res.send(listComments);
-  });
+  Comment.find({ postid: req.params.postid })
+    .sort({ date: -1 })
+    .exec((err, listComments) => {
+      if (err) {
+        return next(err);
+      }
+      return res.send(listComments);
+    });
 };
 
 exports.comment_create = [

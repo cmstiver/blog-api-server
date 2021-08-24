@@ -20,16 +20,11 @@ const commentsRouter = require('./routes/comments');
 const app = express();
 
 // CORS
-app.all('/', (req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'X-Requested-With');
+app.use((req, res, next) => {
+  res.setHeader('Acces-Control-Allow-Origin', '*');
+  res.setHeader('Acces-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE');
+  res.setHeader('Acces-Contorl-Allow-Methods', 'Content-Type', 'Authorization');
   next();
-});
-app.get('/', (req, res, next) => {
-  // Handle the get for this route
-});
-app.post('/', (req, res, next) => {
-  // Handle the post for this route
 });
 
 // view engine setup

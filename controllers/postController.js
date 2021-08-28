@@ -4,7 +4,7 @@ const Post = require('../models/post');
 
 exports.post_list = (req, res, next) => {
   Post.find()
-    .sort({ date: -1 })
+    .sort({ date: 1 })
     .exec((err, listPosts) => {
       if (err) {
         return next(err);

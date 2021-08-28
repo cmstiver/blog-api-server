@@ -13,7 +13,6 @@ router.get('/test', (req, res) => {
   });
 });
 
-router.post('/comments', commentController.comment_create);
 router.post('/comments/:id/delete', commentController.comment_delete);
 
 router.post('/posts/:id', postController.post_update);

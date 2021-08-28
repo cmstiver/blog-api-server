@@ -80,7 +80,7 @@ exports.post_update = [
 ];
 
 exports.post_delete = (req, res, next) => {
-  Post.findOneAndDelete(req.params.id).exec((err, listPosts) => {
+  Post.findByIdAndRemove(req.params.id).exec((err, listPosts) => {
     if (err) {
       return next(err);
     }

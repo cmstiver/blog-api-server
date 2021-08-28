@@ -40,7 +40,7 @@ exports.comment_create = [
 ];
 
 exports.comment_delete = (req, res, next) => {
-  Comment.findOneAndDelete(req.params.id).exec((err, listComments) => {
+  Comment.findByIdAndRemove(req.params.id).exec((err, listComments) => {
     if (err) {
       return next(err);
     }

@@ -8,6 +8,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const passport = require('passport');
 
 const mongoDB = process.env.MONGODB_URI;
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -17,6 +18,8 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 const postsRouter = require('./routes/posts');
 const commentsRouter = require('./routes/comments');
+const auth = require('./routes/auth');
+const secured = require('./routes/secured');
 
 const app = express();
 
@@ -33,8 +36,12 @@ app.use(compression());
 app.use(helmet());
 app.use(cors());
 
+require('./auth/auth');
+
 app.use('/posts', postsRouter);
 app.use('/comments', commentsRouter);
+app.use('/auth', auth);
+app.use('/secured', passport.authenticate('jwt', { session: false }), secured);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

@@ -27,7 +27,7 @@ router.post('/login', async (req, res, next) => {
         if (error) return next(error);
 
         const body = { _id: user._id, email: user.email };
-        const token = jwt.sign({ user: body }, process.env.MONGODB_URI);
+        const token = jwt.sign({ user: body }, process.env.TOKEN_KEY);
 
         return res.json({ token, user: user.email });
       });

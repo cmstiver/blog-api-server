@@ -55,7 +55,7 @@ passport.use(
 passport.use(
   new JWTstrategy(
     {
-      secretOrKey: process.env.MONGODB_URI,
+      secretOrKey: process.env.TOKEN_KEY,
       jwtFromRequest: ExtractJWT.fromUrlQueryParameter('secret_token'),
     },
     async (token, done) => {
